@@ -54,10 +54,9 @@ public class ProcessingDAR {
     
     private static void traverseOrderedFeaturesFile(File DARxmlFile,NodeList productSeries, NodeList features, NodeList SYSOIDtoDeviceFeatures) {
         
-//        System.out.println("IM INSIDE TRAVERSE FEATURES " + ListOfDeviceProfileToFeaturesMappings.size() + " "+ featureMapping.size()
-//        );
         DeviceClass device = new DeviceClass();
-        
+        int indexOfSubStr = DARxmlFile.getName().indexOf(".xml");
+        String name = DARxmlFile.getName().substring(0,indexOfSubStr);
         ArrayList<String>seriesList = new ArrayList<String>();
  
 //        System.out.println("size:" +productSeries.getLength());
@@ -80,7 +79,7 @@ public class ProcessingDAR {
         
         
         if(featuresList.size() > 0) {
-            filenameToFeatures.put(DARxmlFile.getName() , featuresList);
+            filenameToFeatures.put(name , featuresList);
             
             for(int i = 0 ; i < SYSOIDtoDeviceFeatures.getLength() ; i++) {
                 String sysoid = SYSOIDtoDeviceFeatures.item(i).getFirstChild().getTextContent().toString();
@@ -89,7 +88,7 @@ public class ProcessingDAR {
                     if(SYSOIDtoFeaturesMapping.containsKey(sysoid)) {
                         HashMap<String, ArrayList<String>>checkSYSOID;
                         checkSYSOID = SYSOIDtoFeaturesMapping.get(sysoid);
-                        checkSYSOID.put(DARxmlFile.getName() , featuresList);
+                        checkSYSOID.put(name , featuresList);
                     }
                     else
                         SYSOIDtoFeaturesMapping.put(sysoid,filenameToFeatures);
@@ -116,12 +115,12 @@ public class ProcessingDAR {
                     else if(ListOfDeviceProfileToFeaturesMappings.containsKey(series)){
                         HashMap<String, ArrayList<String>>checkSeries;
                         checkSeries = ListOfDeviceProfileToFeaturesMappings.get(series);
-                        checkSeries.put(DARxmlFile.getName() , featuresList);
+                        checkSeries.put(name , featuresList);
                             
                     }
                     else if(!ListOfDeviceProfileToFeaturesMappings.containsKey(series)) {
                         HashMap<String, ArrayList<String>>newDARfile = new HashMap<String, ArrayList<String>>();
-                        newDARfile.put(DARxmlFile.getName() , featuresList);
+                        newDARfile.put(name , featuresList);
                         ListOfDeviceProfileToFeaturesMappings.put(series, newDARfile);
                     }
             }

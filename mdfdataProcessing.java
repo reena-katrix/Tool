@@ -140,7 +140,7 @@ private static TreeNode<DeviceClass> GetParticularDEVICEGROUP(Node deviceGroup,i
 
       //for device group 
       if(lev == 0)
-          htmlStringBuilder.append("<p><li><span><h2>DEVICE PROFILE FEATURES LIST FOR DEVICEGROUP</h2>{DeviceGroupName:"+deviceName+", MDFID: "+ seriesNo+"}</h2></span></li></p>");
+          htmlStringBuilder.append("<p><b><li>DeviceGroup: "+deviceName+"  </li></b><br> MDFID: "+ seriesNo+"</p>");
       deviceObj.print(lev,htmlStringBuilder);
 //      htmlStringBuilder.append("</ol>");
       lev++;
